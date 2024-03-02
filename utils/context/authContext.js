@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import { checkUser } from '../auth';
 import { firebase } from '../client';
+import { checkOrOpenOrder } from '../../controllers/orderData';
 
 const AuthContext = createContext();
 
@@ -42,6 +43,7 @@ const AuthProvider = (props) => {
             userObj = { fbUser, uid: fbUser.uid, ...gamerInfo };
           }
           setUser(userObj);
+          checkOrOpenOrder(gamerInfo.id);
         });
       } else {
         setOAuthUser(false);

@@ -16,6 +16,7 @@ function ProductCard({ productObj }) {
         <h4>Price: {productObj.price}</h4>
         <h4>Quantity: {productObj.quantity}</h4>
         <h4>Category: {productObj.category?.name}</h4>
+        <h4>Quantity: {productObj.totalSales}</h4>
         <Link href={`/product/${productObj.id}`} passHref>
           <Button variant="primary" className="viewBtn m-2">VIEW</Button>
         </Link>
@@ -34,6 +35,7 @@ ProductCard.propTypes = {
     seller: PropTypes.shape,
     sellerId: PropTypes.number,
     orders: PropTypes.shape,
+    totalSales: PropTypes.string,
     categoryId: PropTypes.number,
     category: PropTypes.shape,
   }).isRequired,
