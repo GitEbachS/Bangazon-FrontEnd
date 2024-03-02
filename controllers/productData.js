@@ -38,6 +38,17 @@ const getSellerOrderProducts = (sellerId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getSellerClosedOrderProducts = (sellerId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/sellerProducts/allOrders/${sellerId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 const getAllSellerProducts = (sellerId) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/products/sellers/${sellerId}`, {
     method: 'GET',
@@ -87,5 +98,5 @@ const searchProducts = (userInput) => new Promise((resolve, reject) => {
 });
 
 export {
-  getAllProducts, getSingleProduct, getSellerOrderProducts, getAllSellerProducts, getSellerProductsByCategory, getTwentyProducts, searchProducts,
+  getAllProducts, getSingleProduct, getSellerOrderProducts, getAllSellerProducts, getSellerProductsByCategory, getSellerClosedOrderProducts, getTwentyProducts, searchProducts,
 };

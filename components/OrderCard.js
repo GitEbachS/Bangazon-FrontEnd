@@ -7,14 +7,14 @@ import { deleteOrder } from '../controllers/orderData';
 import { getSingleUser } from '../controllers/userData';
 
 function OrderCard({ orderObj, onUpdate }) {
-  const [customer, getCustomer] = useState({});
+  const [customer, setCustomer] = useState({});
   const deleteThisOrder = () => {
     if (window.confirm(`Delete ${orderObj.id}?`)) {
       deleteOrder(orderObj.id).then(() => onUpdate());
     }
   };
   const getSingleCustomer = () => {
-    getSingleUser(orderObj.customerId).then(getCustomer);
+    getSingleUser(orderObj.customerId)?.then(setCustomer);
   };
 
   useEffect(() => {
@@ -31,13 +31,23 @@ function OrderCard({ orderObj, onUpdate }) {
         <h4>Shipping Type: {orderObj.shipping}</h4>
         <h4>Total Cost: {orderObj.totalCost}</h4>
         <div className="wrapper">
-          <Link href={`/team/${orderObj.id}`} passHref>
-            <Button variant="primary" className="viewBtn m-2">VIEW</Button>
+          <Link href={`/order/${orderObj.id}`} passHref>
+            <div>
+              <Button variant="primary" className="viewBtn m-2">VIEW</Button>
+            </div>
           </Link>
           <h4>List of Products:</h4>
-          {orderObj.products?.map((product) => (
-            <Link href={`/product/${product.id}`} passHref> <Button variant="primary" className="viewBtn m-2">{product.name}</Button></Link>
-          ))}
+          <div>
+            {orderObj.products?.map((product) => (
+              <div key={product.id}>
+                <Link href={`/product/${product.id}`} passHref>
+                  <div className="m-2">
+                    <Button variant="primary" className="viewBtn m-2">{product.name}</Button>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
           <Button variant="outline-warning" size="sm" onClick={deleteThisOrder} className="deleteBtn m-2">
             DELETE
           </Button>
@@ -50,13 +60,26 @@ function OrderCard({ orderObj, onUpdate }) {
 OrderCard.propTypes = {
   orderObj: PropTypes.shape({
     paymentType: PropTypes.string,
-    dateCreated: PropTypes.string,
+    dateCreated: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     shipping: PropTypes.string,
     id: PropTypes.number,
     isClosed: PropTypes.bool,
     totalCost: PropTypes.number,
     customerId: PropTypes.number,
-    products: PropTypes.shape,
+    products: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      description: PropTypes.string,
+      quantity: PropTypes.number,
+      price: PropTypes.number,
+      categoryId: PropTypes.number,
+      sellerId: PropTypes.number,
+      seller: PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        email: PropTypes.string,
+      }),
+    })),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

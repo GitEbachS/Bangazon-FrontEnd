@@ -7,9 +7,11 @@ import {
   Nav,
   Button,
 } from 'react-bootstrap';
+import { useAuth } from '../utils/context/authContext';
 import { signOut } from '../utils/auth';
 
 export default function NavBar() {
+  const { user } = useAuth();
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -29,17 +31,17 @@ export default function NavBar() {
             <Link passHref href="/categories">
               <Nav.Link>Categories</Nav.Link>
             </Link>
-            <Link passHref href="/sellerDashboard">
+            <Link passHref href={`/sellerDash/${user.id}`}>
               <Nav.Link>Seller Dashboard</Nav.Link>
             </Link>
             <Link passHref href="/sellers">
               <Nav.Link>Sellers</Nav.Link>
             </Link>
-            <Link passHref href="/customerOrder">
+            <Link passHref href={`/customerOrder/${user.id}`}>
               <Nav.Link>Customer Orders</Nav.Link>
             </Link>
-            <Link passHref href="/delete-me">
-              <Nav.Link>Delete Me</Nav.Link>
+            <Link passHref href={`/cart/${user.id}`}>
+              <Nav.Link>Cart</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
               Sign Out

@@ -26,8 +26,8 @@ const getSingleOrder = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const customerOpenOrderDetails = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/productOrders/customers/${id}`, {
+const getCart = (userId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/cartOrder/customer/${userId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -38,15 +38,38 @@ const customerOpenOrderDetails = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const checkOrOpenOrder = (userId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/cartOrder/new/${userId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const updateCartOrder = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/cartOrder/close`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  }).then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 const customerClosedOrderDetails = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/openOrder/customers/${id}`, {
+  fetch(`${endpoint}/api/closedOrders/customers/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(data))
+    .then((data) => resolve(Object.values(data)))
     .catch(reject);
 });
 
@@ -99,5 +122,5 @@ const deleteOrder = (orderId, productId) => new Promise((resolve, reject) => {
 });
 
 export {
-  getAllOrders, getSingleOrder, customerOpenOrderDetails, customerClosedOrderDetails, createOrder, addProductToOrder, updateOrder, deleteOrder,
+  getAllOrders, getSingleOrder, customerClosedOrderDetails, createOrder, addProductToOrder, updateOrder, deleteOrder, checkOrOpenOrder, updateCartOrder, getCart,
 };
