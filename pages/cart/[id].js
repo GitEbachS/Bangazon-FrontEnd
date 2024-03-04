@@ -14,7 +14,7 @@ function Cart() {
   useEffect(() => {
     getCartOrder();
   }, []);
-  console.warn(cartOrder);
+
   return (
     <div>
       <h1>CUSTOMER CART DETAILS </h1>
@@ -27,12 +27,8 @@ function Cart() {
       <h4>Shipping Type: {cartOrder.shipping}</h4>
       <h4>Total Cost: {cartOrder.totalCost}</h4>
       <h3>Product List:</h3>
-      {cartOrder.Products && cartOrder.Products?.map((product) => (
-        <ProductCard key={product.id} orderObj={product} onUpdate={getCartOrder} />
-      ))}
-
-      {!cartOrder.Products && <p>There are no products in your cart!</p>}
-
+      {cartOrder.products ? cartOrder.products?.map((product) => (
+        <ProductCard key={product.id} productObj={product} onUpdate={getCartOrder} />)) : <p>There are no items in your cart!</p>}
     </div>
 
   );
