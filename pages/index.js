@@ -1,35 +1,43 @@
-import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 import ProductCard from '../components/ProductCard';
 import { getTwentyProducts } from '../controllers/productData';
+import UserForm from '../components/forms/UserForm';
+import { getSingleUser } from '../controllers/userData';
 
 function Home() {
   const [products, setProducts] = useState([]);
   const { user } = useAuth();
+  const [singleUser, setSingleUser] = useState(null);
 
   const getTProducts = () => {
     getTwentyProducts()?.then(setProducts);
   };
 
   useEffect(() => {
-    getTProducts();
-  }, []);
+    getSingleUser(user.id).then(setSingleUser);
 
-  console.warn(products);
+    getTProducts();
+  }, [user.id]);
+
+  const onUpdate = () => {
+    getSingleUser(user.id).then(setSingleUser);
+    getTwentyProducts()?.then(setProducts);
+  };
 
   return (
     <div>
-      <h1>Hello {user.fbUser.displayName}! </h1>
-      <p>Here are our most up to date products to view!</p>
-      {products.map((product) => (
-        <ProductCard key={product.id} productObj={product} onUpdate={getTProducts} />
-      ))}
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
+      { singleUser === null ? (<UserForm onUpdate={onUpdate} />) : (
+
+        <div>
+          <><h1>Hello {user.fbUser.displayName}! </h1><p>Here are our most up to date products to view!</p></>
+          {products.map((product) => (
+            <ProductCard key={product.id} productObj={product} onUpdate={getTProducts} />
+          ))}
+        </div>
+
+      )}
+
     </div>
   );
 }
