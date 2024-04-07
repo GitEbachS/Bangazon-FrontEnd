@@ -37,7 +37,7 @@ export default function UserForm({ userObj, onUpdate }) {
       createUser({ ...formInput, uid: user.uid })?.then(onUpdate);
     }
   };
-  console.warn(userObj);
+
   return (
     <>
       <Form onSubmit={handleSubmit} className="userForm">

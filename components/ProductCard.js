@@ -42,25 +42,25 @@ function ProductCard({ productObj }) {
   }, [user.id]);
 
   return (
-    <Card style={{ width: '18rem', margin: '15px auto' }}>
+    <Card className="card-style" style={{ width: '38rem' }}>
       <Card.Body>
-        <Card.Title className="teamTitle">Product#{productObj.id}</Card.Title>
-        <h4>Product Name: {productObj.name}</h4>
+        <Card.Img variant="top" src={productObj.image} alt={productObj.name} />
+        <Card.Title className="teamTitle">Product #{productObj.id}</Card.Title>
+        <h4>{productObj.name}</h4>
         <Link passHref href={`/user/${productObj.sellerId}`}>
           <span style={{ color: 'blue', cursor: 'pointer' }}>Seller: {productObj.seller.name}</span>
         </Link>
         <h4>Description: {productObj.description}</h4>
-        <h4>Price: {productObj.price}</h4>
+        <h4>Price: ${productObj.price}</h4>
         <h4>Quantity: {productObj.quantity}</h4>
         <h4>Category: {productObj.category?.name}</h4>
-        <h4>Quantity: {productObj.totalSales}</h4>
         <div>
           <Link href={`/product/${productObj.id}`} passHref>
-            <Button variant="primary" className="viewBtn m-2">VIEW</Button>
+            <Button id="viewbtn" className="viewBtn m-2">VIEW</Button>
           </Link>
         </div>
 
-        {added ? <Button variant="primary" onClick={removeFromCart} className="viewBtn m-2">Remove From Cart</Button> : <Button variant="primary" onClick={addToCart} className="viewBtn m-2">Add To Cart</Button>}
+        {added ? <Button id="cartremovebtn" onClick={removeFromCart} className="viewBtn m-2">Remove From Cart</Button> : <Button id="cartremovebtn" onClick={addToCart} className="viewBtn m-2">Add To Cart</Button>}
 
       </Card.Body>
     </Card>
@@ -71,6 +71,7 @@ ProductCard.propTypes = {
   productObj: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
+    image: PropTypes.string,
     description: PropTypes.string,
     price: PropTypes.number,
     quantity: PropTypes.number,

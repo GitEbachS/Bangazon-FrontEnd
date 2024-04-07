@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { getCart } from '../../controllers/orderData';
 import { useAuth } from '../../utils/context/authContext';
@@ -13,7 +14,7 @@ function Cart() {
 
   useEffect(() => {
     getCartOrder();
-  }, []);
+  }, [user]);
 
   return (
     <div>
@@ -27,8 +28,10 @@ function Cart() {
       <h4>Shipping Type: {cartOrder.shipping}</h4>
       <h4>Total Cost: {cartOrder.totalCost}</h4>
       <h3>Product List:</h3>
-      {cartOrder.products ? cartOrder.products?.map((product) => (
-        <ProductCard key={product.id} productObj={product} onUpdate={getCartOrder} />)) : <p>There are no items in your cart!</p>}
+      <div className="card-container">
+        {cartOrder.products ? cartOrder.products?.map((product) => (
+          <ProductCard key={product.id} productObj={product} onUpdate={getCartOrder} />)) : <p>There are no items in your cart!</p>}
+      </div>
     </div>
 
   );

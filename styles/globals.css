@@ -18,5 +18,84 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #aebccc;
+}
+.title {
+  font-style: italic;
+  font-family:cursive;
+  font-size: 30px;
+}
+h2, h1 {
+  color: #464242;
+}
+
+h4 {
+  color: rgb(80, 75, 75);
+}
+.orderTitle {
+  color: black;
+  font-style: italic;
+}
+.card-style {
+  background-color: #ece5e5;
+  font-family: Arial, Helvetica, sans-serif;
+  border-color: #7e7a7a;
+  border-width: 3px;
+  color: #222020;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  gap: 20px
+}
+
+.cat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-evenly;
+  align-items:flex-start;
+  padding: 25px;
+  gap: 20px
+}
+#linkbtn {
+  color: rgb(22, 116, 238);
+  font-size: 26px;
+}
+
+#linkbtn:hover {
+color: rgb(5, 87, 194);
+}
+#sellerBtn {
+  width: 150px;
+  border-color: #404040;
+  color: white;
+  background-color: rgb(119, 118, 118);
+}
+.catCard {
+  border-color: rgb(76, 104, 88);
+}
+#cartremovebtn {
+  width: 150px;
+  border-color: #404040;
+  color: white;
+  background-color: rgb(119, 118, 118);
+}
+
+#cartremovebtn:hover{
+  background-color:#404040;
+}
+
+#viewbtn{
+  width: 150px;
+  color: white;
+  border-color: #404040;
+  background-color: rgb(119, 118, 118);
+}
+
+#viewbtn:hover{
+  background-color:#404040;
 }

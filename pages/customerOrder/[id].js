@@ -25,14 +25,13 @@ function Order() {
   return (
     <div>
       <h1>CUSTOMER ORDER DETAILS </h1>
-      <p>Here are all of the current orders to view!</p>
+      <p className="orderTitle">Here are all of the current orders to view!</p>
       <div>
         {orders?.map((order) => (
           <OrderCard key={order.id} orderObj={order} onUpdate={getCustOrders} />
         ))}
       </div>
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+      <Button variant="outline-secondary" type="button" size="lg" className="copy-btn" onClick={signOut}>
         Sign Out
       </Button>
     </div>

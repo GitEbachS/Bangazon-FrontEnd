@@ -30,10 +30,12 @@ function Home() {
       { singleUser === null ? (<UserForm onUpdate={onUpdate} />) : (
 
         <div>
-          <><h1>Hello {user.fbUser.displayName}! </h1><p>Here are our most up to date products to view!</p></>
-          {products.map((product) => (
-            <ProductCard key={product.id} productObj={product} onUpdate={getTProducts} />
-          ))}
+          <><h3>Hello {user.fbUser.displayName}! </h3><p className="orderTitle">Here are our most up to date products to view!</p></>
+          <div className="card-container">
+            {products.map((product) => (
+              <ProductCard key={product.id} productObj={product} onUpdate={getTProducts} />
+            ))}
+          </div>
         </div>
 
       )}

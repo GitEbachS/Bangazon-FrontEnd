@@ -23,28 +23,26 @@ function OrderCard({ orderObj, onUpdate }) {
   }, []);
 
   return (
-    <Card style={{ width: '18rem', margin: '15px auto' }}>
+    <Card className="card-style" style={{ width: '38rem' }}>
       <Card.Body>
-        <Card.Title className="teamTitle">Order#{orderObj.id}</Card.Title>
+        <Card.Title className="orderTitle">Order#{orderObj.id}</Card.Title>
         <h4>Customer Name: {customer.name}</h4>
         <h4>Payment Type: {orderObj.paymentType}</h4>
-        <h4>Is Order Closed? {orderObj.isClosed ? 'Yes' : 'No'}</h4>
+        <h4>Order Status: {orderObj.isClosed ? 'Closed' : 'Open'}</h4>
         <h4>Shipping Type: {orderObj.shipping}</h4>
         <h4>Total Cost: {orderObj.totalCost}</h4>
         <div className="wrapper">
           <Link href={`/order/${orderObj.id}`} passHref>
             <div>
-              <Button variant="primary" className="viewBtn m-2">VIEW</Button>
+              <Button id="viewbtn" className="viewBtn m-2">VIEW</Button>
             </div>
           </Link>
-          <h4>List of Products:</h4>
+          <h3 className="orderTitle">List of Products:</h3>
           <div>
             {orderObj.products?.map((product) => (
-              <div key={product.id}>
+              <div id="linkbtn" key={product.id}>
                 <Link href={`/product/${product.id}`} passHref>
-                  <div className="m-2">
-                    <Button variant="primary" className="viewBtn m-2">{product.name}</Button>
-                  </div>
+                  {product.name}
                 </Link>
               </div>
             ))}
