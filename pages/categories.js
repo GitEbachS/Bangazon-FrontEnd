@@ -17,13 +17,15 @@ function Category() {
 
   return (
     <div>
-      <h1>CATEGORIES </h1>
-      <p>Here are our most up to date products to view for each category!</p>
-      {categories.map((category) => (
-        <CategoryCard key={category.id} categoryObj={category} onUpdate={getCatDetails} />
-      ))}
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+      <h1>SPICE CATEGORIES </h1>
+      <p>View our most up to date spices from each category!</p>
+      <div className="cat-container">
+        {categories.map((category) => (
+          <CategoryCard key={category.id} categoryObj={category} onUpdate={getCatDetails} />
+        ))}
+      </div>
+
+      <Button variant="outline-secondary" type="button" size="lg" className="copy-btn" onClick={signOut}>
         Sign Out
       </Button>
     </div>

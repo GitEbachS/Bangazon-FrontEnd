@@ -5,13 +5,14 @@ import Link from 'next/link';
 
 function SellerCard({ sellerObj }) {
   return (
-    <Card style={{ width: '18rem', margin: '15px auto' }}>
+    <Card className="card-style" style={{ width: '38rem' }}>
       <Card.Body>
-        <Card.Title className="teamTitle">{sellerObj.name}</Card.Title>
-        <h4>Customer Name: {sellerObj.email}</h4>
+        <Card.Img variant="top" src={sellerObj.image} alt={sellerObj.name} />
+        <Card.Title className="teamTitle">Name: {sellerObj.name}</Card.Title>
+        <h4>Email: {sellerObj.email}</h4>
         <div className="wrapper">
           <Link href={`/user/${sellerObj.id}`} passHref>
-            <Button variant="primary" className="viewBtn m-2">View the Product Store for {sellerObj.name}</Button>
+            <Button id="sellerBtn" className="viewBtn m-2">View Product Store</Button>
           </Link>
         </div>
       </Card.Body>
@@ -22,6 +23,7 @@ function SellerCard({ sellerObj }) {
 SellerCard.propTypes = {
   sellerObj: PropTypes.shape({
     id: PropTypes.number,
+    image: PropTypes.string,
     name: PropTypes.string,
     email: PropTypes.string,
   }).isRequired,

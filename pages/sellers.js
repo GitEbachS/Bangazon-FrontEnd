@@ -17,13 +17,15 @@ function Seller() {
 
   return (
     <div>
-      <h1>PRODUCTS </h1>
-      <p>Here are our most up to date sellers to view!</p>
-      {sellers.map((seller) => (
-        <SellerCard key={seller.id} sellerObj={seller} onUpdate={getAllSellers} />
-      ))}
+      <h1>Sellers and Their Products</h1>
+      <p>View our sellers with a link to their product store!</p>
+      <div className="card-container">
+        {sellers.map((seller) => (
+          <SellerCard key={seller.id} sellerObj={seller} onUpdate={getAllSellers} />
+        ))}
+      </div>
       <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+      <Button variant="outline-secondary" type="button" size="lg" className="copy-btn" onClick={signOut}>
         Sign Out
       </Button>
     </div>
